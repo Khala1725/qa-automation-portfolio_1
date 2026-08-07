@@ -1,0 +1,31 @@
+# Azure DevOps equivalent of the GitHub Actions workflow.
+# Included to demonstrate Azure Pipelines familiarity alongside GitHub Actions.
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  - script: npm ci
+    displayName: 'Install dependencies'
+
+  - script: npx playwright install --with-deps chromium
+    displayName: 'Install Playwright browsers'
+
+  - script: npm run test:all
+    displayName: 'Run E2E + API test suites'
+
+  - task: PublishPipelineArtifact@1
+    condition: always()
+    inputs:
+      targetPath: 'playwright-report'
+      artifact: 'playwright-report'
+    displayName: 'Publish HTML report'

@@ -1,0 +1,16 @@
+{
+  "name": "qa-automation-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio project demonstrating E2E, API, and CI/CD test automation practices",
+  "scripts": {
+    "test:e2e": "playwright test e2e",
+    "test:api": "playwright test api",
+    "test:all": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4"
+  }
+}
